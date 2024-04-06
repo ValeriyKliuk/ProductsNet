@@ -364,3 +364,9 @@ FodyWeavers.xsd
 
 # Misc
 **/client/src/app/generated/
+
+
+# macOS
+.DS_Store
+
+.vscode/
