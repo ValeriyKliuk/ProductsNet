@@ -5,7 +5,7 @@ namespace Persistence
 {
     public class Seed
     {
-        public static void SeedData(DataContext context)
+        public static async Task SeedData(DataContext context)
         {
             if (context.Products.CountAsync().Result == 0)
             {
@@ -28,7 +28,7 @@ namespace Persistence
                         Rating = 5,
                         Color = "Red",
                         Shipping = "Shipping 1",
-                        Date = DateTime.Now
+                        Date = DateTime.UtcNow.AddMonths(-2)
                     },
                     new Product
                     {
@@ -47,7 +47,7 @@ namespace Persistence
                         Rating = 4,
                         Color = "Blue",
                         Shipping = "Shipping 2",
-                        Date = DateTime.Now
+                        Date = DateTime.UtcNow.AddMonths(-1)
                     },
                     new Product
                     {
@@ -66,12 +66,12 @@ namespace Persistence
                         Rating = 3,
                         Color = "Green",
                         Shipping = "Shipping 3",
-                        Date = DateTime.Now
+                        Date = DateTime.UtcNow.AddMonths(1)
                     }
                 };
 
-                context.Products.AddRange(products);
-                context.SaveChanges();
+                await context.Products.AddRangeAsync(products);
+                await context.SaveChangesAsync();
             }
         }
     }
