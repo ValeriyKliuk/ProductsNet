@@ -1,10 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "/6hx0pU8Bsi9R/yfQPZOSjg0NurBhFpvX48nmS3k8HEVCNaMaxylPHz1RESfsmzTg77VX5eDfd3uiXOnU3K84A==",
+  "dgSpecHash": "I903IB3xjuMWoWjg69ce6QaJjWz7YmWIIyDatm81bDIqEO6eqyTxlJ71m1cRFfpSQdV/hRHr9OBqBxBmRn0QGw==",
   "success": true,
   "projectFilePath": "/Users/valeriykliuk/Developer/dotNet/ProductsNet/API/API.csproj",
   "expectedPackageFiles": [
     "/Users/valeriykliuk/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
+    "/Users/valeriykliuk/.nuget/packages/mediatr/12.2.0/mediatr.12.2.0.nupkg.sha512",
+    "/Users/valeriykliuk/.nuget/packages/mediatr.contracts/2.0.1/mediatr.contracts.2.0.1.nupkg.sha512",
     "/Users/valeriykliuk/.nuget/packages/microsoft.bcl.asyncinterfaces/6.0.0/microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",
     "/Users/valeriykliuk/.nuget/packages/microsoft.codeanalysis.analyzers/3.3.3/microsoft.codeanalysis.analyzers.3.3.3.nupkg.sha512",
     "/Users/valeriykliuk/.nuget/packages/microsoft.codeanalysis.common/4.5.0/microsoft.codeanalysis.common.4.5.0.nupkg.sha512",

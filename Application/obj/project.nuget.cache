@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "BYm0Cevp50NkSHz7caK8VLCvFB9/bUxN2nz3hqEicnY/nR+u2EjGE06M1pAEHLNWMpd2hNG4qKhPTYkOIHsMmw==",
+  "dgSpecHash": "An9B+1GOVU0ktZQ7PF0ZettVLQsmrPVHOdgEUVEqfGiRWgceKmIfRnqzd5QQMg90Z14B2t7jQPYP3ezxpOcOnA==",
   "success": true,
   "projectFilePath": "/Users/valeriykliuk/Developer/dotNet/ProductsNet/Application/Application.csproj",
   "expectedPackageFiles": [
+    "/Users/valeriykliuk/.nuget/packages/mediatr/12.2.0/mediatr.12.2.0.nupkg.sha512",
+    "/Users/valeriykliuk/.nuget/packages/mediatr.contracts/2.0.1/mediatr.contracts.2.0.1.nupkg.sha512",
     "/Users/valeriykliuk/.nuget/packages/microsoft.data.sqlite.core/8.0.3/microsoft.data.sqlite.core.8.0.3.nupkg.sha512",
     "/Users/valeriykliuk/.nuget/packages/microsoft.entityframeworkcore/8.0.3/microsoft.entityframeworkcore.8.0.3.nupkg.sha512",
     "/Users/valeriykliuk/.nuget/packages/microsoft.entityframeworkcore.abstractions/8.0.3/microsoft.entityframeworkcore.abstractions.8.0.3.nupkg.sha512",

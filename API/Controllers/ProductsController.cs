@@ -1,29 +1,21 @@
 using Microsoft.AspNetCore.Mvc;
 using Domain;
-using Persistence;
-using Microsoft.EntityFrameworkCore;
-
+using Application.Products;
 
 namespace API.Controllers
 {
     public class ProductsController: BaseAPIController
     {
-        private readonly DataContext context;
-        public ProductsController(DataContext context)
-        {
-            this.context = context;
-        }
-
         [HttpGet] //api/products
         public async Task<ActionResult<List<Product>>> GetProducts()
         {
-            return await context.Products.ToListAsync();
+            return await Mediator.Send(new List.Query());
         }
 
         [HttpGet("{id}")] //api/products/{id}
         public async Task<ActionResult<Product>> GetProduct(Guid id)
         {
-            return await context.Products.FindAsync(id);
+            return await Mediator.Send(new Details.Query{Id = id});
         }
     }
 }
