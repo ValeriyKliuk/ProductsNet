@@ -1,25 +1,29 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import axios from 'axios';
+import { Product } from './models/Product';
+import { Header, List } from 'semantic-ui-react';
+import ProductView from './components/ProductView';
 
 function App() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/Products').then((response) => {
-      console.log(response.data);
-      setProducts(response.data);
-    });
-  }, []);
+    if (products.length === 0) {
+      axios.get('http://localhost:5000/api/Products').then((response) => {
+        setProducts(response.data);
+      });
+    }
+  }, [products]);
+
   return (
     <div>
-      <h1>Products</h1>
-      {products.map((product: any) => (
-        <div key={product.id}>
-          <h2>{product.name}</h2>
-          <p>{product.description}</p>
-        </div>
-      ))}
+      <Header as='h2' icon='shopping bag' content='Products' />
+      <List divided relaxed>
+        {products.map((product: Product) => (
+          <ProductView key={product.id} product={product} />
+        ))}
+      </List>
     </div>
   );
 }
