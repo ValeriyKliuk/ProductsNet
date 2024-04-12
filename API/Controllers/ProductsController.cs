@@ -34,5 +34,13 @@ namespace API.Controllers
 
             return Ok();
         }
+
+        [HttpDelete("{id}")] //api/products/{id}
+        public async Task<ActionResult> DeleteProduct(Guid id)
+        {
+            await Mediator.Send(new Delete.Command{Id = id});
+
+            return Ok();
+        }
     }
 }
