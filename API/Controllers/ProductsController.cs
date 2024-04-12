@@ -25,5 +25,14 @@ namespace API.Controllers
 
             return Ok();
         }
+
+        [HttpPut("{id}")] //api/products/{id}
+        public async Task<ActionResult> EditProduct(Guid id, Product product)
+        {
+            product.Id = id;
+            await Mediator.Send(new Edit.Command{Product = product});
+
+            return Ok();
+        }
     }
 }
