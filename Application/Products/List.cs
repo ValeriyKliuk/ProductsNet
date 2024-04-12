@@ -1,6 +1,7 @@
 using Domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Persistence;
 
 namespace Application.Products
@@ -11,15 +12,27 @@ namespace Application.Products
 
         public class Handler : IRequestHandler<Query, List<Product>>
         {
-            private readonly DataContext context;
-            public Handler(DataContext context)
+            private readonly DataContext _context;
+            public ILogger<List> _logger { get; }
+            public Handler(DataContext context, ILogger<List> logger)
             {
-                this.context = context;
+                _logger = logger;
+                _context = context;
             }
            
             public async Task<List<Product>> Handle(Query request, CancellationToken cancellationToken)
             {
-                return await this.context.Products.ToListAsync();
+                try
+                {
+                    cancellationToken.ThrowIfCancellationRequested();
+                    await Task.Delay(1000, cancellationToken);
+                    _logger.LogInformation("Getting products... Task has completed!");
+                }
+                catch (Exception)
+                {
+                    _logger.LogInformation("Task was cancelled");
+                }
+                return await _context.Products.ToListAsync();
             }
         }
     }
