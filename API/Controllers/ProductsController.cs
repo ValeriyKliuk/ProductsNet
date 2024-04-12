@@ -7,9 +7,9 @@ namespace API.Controllers
     public class ProductsController: BaseAPIController
     {
         [HttpGet] //api/products
-        public async Task<ActionResult<List<Product>>> GetProducts(CancellationToken cancellationToken)
+        public async Task<ActionResult<List<Product>>> GetProducts()
         {
-            return await Mediator.Send(new List.Query(), cancellationToken);
+            return await Mediator.Send(new List.Query());
         }
 
         [HttpGet("{id}")] //api/products/{id}
