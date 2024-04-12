@@ -26,7 +26,7 @@
 			"response": []
 		},
 		{
-			"name": "Create Post",
+			"name": "Create Product",
 			"event": [
 				{
 					"listen": "prerequest",
@@ -60,14 +60,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{url}}/api/Products/66ae7ab4-8a1d-48e1-86e8-6903e780634d",
+					"raw": "{{url}}/api/Products/",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
 						"api",
 						"Products",
-						"66ae7ab4-8a1d-48e1-86e8-6903e780634d"
+						""
 					]
 				}
 			},
@@ -79,14 +79,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{url}}/api/Products/13c09794-6eed-47f0-bc9c-6c237c357107",
+					"raw": "{{url}}/api/Products/09f346f5-d855-43df-95d1-15b422a95ea0",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
 						"api",
 						"Products",
-						"13c09794-6eed-47f0-bc9c-6c237c357107"
+						"09f346f5-d855-43df-95d1-15b422a95ea0"
 					]
 				}
 			},
@@ -230,14 +230,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{url}}/api/Products/13c09794-6eed-47f0-bc9c-6c237c357107",
+					"raw": "{{url}}/api/Products/09f346f5-d855-43df-95d1-15b422a95ea0",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
 						"api",
 						"Products",
-						"13c09794-6eed-47f0-bc9c-6c237c357107"
+						"09f346f5-d855-43df-95d1-15b422a95ea0"
 					]
 				}
 			},
@@ -255,14 +255,14 @@
 					}
 				],
 				"url": {
-					"raw": "{{url}}/api/Products/13c09794-6eed-47f0-bc9c-6c237c357107",
+					"raw": "{{url}}/api/Products/09f346f5-d855-43df-95d1-15b422a95ea0",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
 						"api",
 						"Products",
-						"13c09794-6eed-47f0-bc9c-6c237c357107"
+						"09f346f5-d855-43df-95d1-15b422a95ea0"
 					]
 				}
 			},
