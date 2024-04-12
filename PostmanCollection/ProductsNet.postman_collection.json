@@ -1,0 +1,278 @@
+{
+	"info": {
+		"_postman_id": "1755a6cb-8acb-47f2-9a8c-d7df6c9bd24a",
+		"name": "ProductsNet",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1826049"
+	},
+	"item": [
+		{
+			"name": "WeatherForecast",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/WeatherForecast",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"WeatherForecast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Post",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var moment = require(\"moment\");",
+							"",
+							"pm.environment.set('productDate', moment().add(14, 'days').toISOString());"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{    \n\t\"id\": \"{{$guid}}\",\n    \"name\": \"Test Create Product2\",\n    \"shortName\": \"Test Product2\",\n\t\"description\": \"Description of the test Product2\",\n    \"shortDescription\": \"Short Description of Product2\",\n    \"price\": 200,\n    \"category\": \"Category 2\",\n    \"image\": \"image1.jpg\",\n    \"height\": 20,\n    \"width\": 20,\n    \"depth\": 20,\n    \"weight\": 20,\n    \"quantity\": 20,\n    \"rating\": 4,\n    \"color\": \"Red\",\n    \"shipping\": \"Shipping 2\",\n\t\"date\": \"{{productDate}}\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/api/Products/66ae7ab4-8a1d-48e1-86e8-6903e780634d",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"Products",
+						"66ae7ab4-8a1d-48e1-86e8-6903e780634d"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Product",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/api/Products/13c09794-6eed-47f0-bc9c-6c237c357107",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"Products",
+						"13c09794-6eed-47f0-bc9c-6c237c357107"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "New Request",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/Products/66ae7ab4-8a1d-48e1-86e8-6903e780634d",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"Products",
+								"66ae7ab4-8a1d-48e1-86e8-6903e780634d"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 09 Apr 2024 20:46:58 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"66ae7ab4-8a1d-48e1-86e8-6903e780634d\",\n    \"name\": \"Product 1\",\n    \"shortName\": \"P1\",\n    \"description\": \"Description of Product 1\",\n    \"shortDescription\": \"Short Description of Product 1\",\n    \"price\": 100,\n    \"category\": \"Category 1\",\n    \"image\": \"image1.jpg\",\n    \"height\": 10,\n    \"width\": 10,\n    \"depth\": 10,\n    \"weight\": 10,\n    \"quantity\": 10,\n    \"rating\": 5,\n    \"color\": \"Red\",\n    \"shipping\": \"Shipping 1\",\n    \"date\": \"2024-02-09T19:50:22.357425\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Get Products",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/api/Products",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"Products"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "New Request",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/Products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"Products"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 09 Apr 2024 20:45:02 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": \"66ae7ab4-8a1d-48e1-86e8-6903e780634d\",\n        \"name\": \"Product 1\",\n        \"shortName\": \"P1\",\n        \"description\": \"Description of Product 1\",\n        \"shortDescription\": \"Short Description of Product 1\",\n        \"price\": 100,\n        \"category\": \"Category 1\",\n        \"image\": \"image1.jpg\",\n        \"height\": 10,\n        \"width\": 10,\n        \"depth\": 10,\n        \"weight\": 10,\n        \"quantity\": 10,\n        \"rating\": 5,\n        \"color\": \"Red\",\n        \"shipping\": \"Shipping 1\",\n        \"date\": \"2024-02-09T19:50:22.357425\"\n    },\n    {\n        \"id\": \"6ed13e48-9d9e-405a-950a-f9d9e1b0ed08\",\n        \"name\": \"Product 3\",\n        \"shortName\": \"P3\",\n        \"description\": \"Description of Product 3\",\n        \"shortDescription\": \"Short Description of Product 3\",\n        \"price\": 300,\n        \"category\": \"Category 3\",\n        \"image\": \"image3.jpg\",\n        \"height\": 30,\n        \"width\": 30,\n        \"depth\": 30,\n        \"weight\": 30,\n        \"quantity\": 30,\n        \"rating\": 3,\n        \"color\": \"Green\",\n        \"shipping\": \"Shipping 3\",\n        \"date\": \"2024-05-09T19:50:22.357442\"\n    },\n    {\n        \"id\": \"ec1632b3-77e8-4e0e-afaf-af81eec3df55\",\n        \"name\": \"Product 2\",\n        \"shortName\": \"P2\",\n        \"description\": \"Description of Product 2\",\n        \"shortDescription\": \"Short Description of Product 2\",\n        \"price\": 200,\n        \"category\": \"Category 2\",\n        \"image\": \"image2.jpg\",\n        \"height\": 20,\n        \"width\": 20,\n        \"depth\": 20,\n        \"weight\": 20,\n        \"quantity\": 20,\n        \"rating\": 4,\n        \"color\": \"Blue\",\n        \"shipping\": \"Shipping 2\",\n        \"date\": \"2024-03-09T19:50:22.357442\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Update Product",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var moment = require(\"moment\");",
+							"",
+							"pm.environment.set('productDate', moment().add(16, 'days').toISOString());"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Test Create Product2 {Updated}\",\n    \"shortName\": \"Test Product2{Updated}\",\n\t\"description\": \"Description of the test Product2 {Updated}\",\n    \"shortDescription\": \"Short Description of Product2{Updated}\",\n    \"price\": 300,\n    \"category\": \"Category 3\",\n    \"image\": \"image3.jpg\",\n    \"height\": 30,\n    \"width\": 30,\n    \"depth\": 30,\n    \"weight\": 30,\n    \"quantity\": 30,\n    \"rating\": 5,\n    \"color\": \"Yellow\",\n    \"shipping\": \"Shipping 3\",\n\t\"date\": \"{{productDate}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/api/Products/13c09794-6eed-47f0-bc9c-6c237c357107",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"Products",
+						"13c09794-6eed-47f0-bc9c-6c237c357107"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Product",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/api/Products/13c09794-6eed-47f0-bc9c-6c237c357107",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"Products",
+						"13c09794-6eed-47f0-bc9c-6c237c357107"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "http://localhost:5000"
+		}
+	]
+}
