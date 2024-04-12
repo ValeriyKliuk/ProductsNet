@@ -1,11 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "An9B+1GOVU0ktZQ7PF0ZettVLQsmrPVHOdgEUVEqfGiRWgceKmIfRnqzd5QQMg90Z14B2t7jQPYP3ezxpOcOnA==",
+  "dgSpecHash": "0B6Ax6d/aP5nv//D5sDtw/zjtSMlciI+NXIAyHJ4eNh5pODoHDmEgIF8WyezHGokWvOPRn8kbHV4Pfzs35ewYg==",
   "success": true,
   "projectFilePath": "/Users/valeriykliuk/Developer/dotNet/ProductsNet/Application/Application.csproj",
   "expectedPackageFiles": [
+    "/Users/valeriykliuk/.nuget/packages/automapper/12.0.1/automapper.12.0.1.nupkg.sha512",
+    "/Users/valeriykliuk/.nuget/packages/automapper.extensions.microsoft.dependencyinjection/12.0.1/automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
     "/Users/valeriykliuk/.nuget/packages/mediatr/12.2.0/mediatr.12.2.0.nupkg.sha512",
     "/Users/valeriykliuk/.nuget/packages/mediatr.contracts/2.0.1/mediatr.contracts.2.0.1.nupkg.sha512",
+    "/Users/valeriykliuk/.nuget/packages/microsoft.csharp/4.7.0/microsoft.csharp.4.7.0.nupkg.sha512",
     "/Users/valeriykliuk/.nuget/packages/microsoft.data.sqlite.core/8.0.3/microsoft.data.sqlite.core.8.0.3.nupkg.sha512",
     "/Users/valeriykliuk/.nuget/packages/microsoft.entityframeworkcore/8.0.3/microsoft.entityframeworkcore.8.0.3.nupkg.sha512",
     "/Users/valeriykliuk/.nuget/packages/microsoft.entityframeworkcore.abstractions/8.0.3/microsoft.entityframeworkcore.abstractions.8.0.3.nupkg.sha512",

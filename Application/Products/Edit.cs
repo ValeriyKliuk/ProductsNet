@@ -1,3 +1,4 @@
+using AutoMapper;
 using Domain;
 using MediatR;
 using Persistence;
@@ -14,8 +15,10 @@ namespace Application.Products
         public class Handler : IRequestHandler<Command>
         {
             private readonly DataContext _context;
-            public Handler(DataContext context)
+            public readonly IMapper _mapper;
+            public Handler(DataContext context, IMapper mapper)
             {
+                _mapper = mapper;
                 _context = context;
             }
 
@@ -26,10 +29,7 @@ namespace Application.Products
                 if(product == null)
                     throw new Exception("Could not find product");
 
-                product.Name = request.Product.Name ?? product.Name;
-                product.Description = request.Product.Description ?? product.Description;
-                product.ShortName = request.Product.ShortName ?? product.ShortName;
-                product.ShortDescription = request.Product.ShortDescription ?? product.ShortDescription;
+                _mapper.Map(request.Product, product);
 
                 await _context.SaveChangesAsync();
             }
