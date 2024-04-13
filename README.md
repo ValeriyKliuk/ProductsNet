@@ -24,3 +24,8 @@ cd products-client-app
 yarn
 yarn dev
 ```
+
+## Media
+<img width="502" alt="Products ReactJS" src="https://github.com/ValeriyKliuk/ProductsNet/assets/750868/be1c32a4-8810-4eb9-8a25-4ee46d2078f9">
+
+
