@@ -1,7 +1,7 @@
 import React from 'react';
-import { Grid, List } from 'semantic-ui-react';
+import { Grid } from 'semantic-ui-react';
 import { Product } from '../../../app/models/Product';
-import ProductView from '../components/ProductView';
+import { ProductList } from '../components/ProductList';
 
 interface ProductDashboardProps {
   products: Product[];
@@ -12,11 +12,7 @@ export const ProductDashboard: React.FC<ProductDashboardProps> = ({
   return (
     <Grid>
       <Grid.Column width={10}>
-        <List divided relaxed>
-          {products.map((product) => (
-            <ProductView key={product.id} product={product} />
-          ))}
-        </List>
+        <ProductList products={products} />
       </Grid.Column>
     </Grid>
   );
