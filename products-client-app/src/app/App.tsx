@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import axios from 'axios';
 import { Product } from './models/Product';
-import { Header, List } from 'semantic-ui-react';
-import ProductView from './components/ProductView';
+import NavBar from './layout/NavBar';
+import { ProductDashboard } from '../features/products/dashboard/ProductDashboard';
 
 function App() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -19,14 +19,10 @@ function App() {
   }, [products]);
 
   return (
-    <div>
-      <Header as='h2' icon='shopping bag' content='Products' />
-      <List divided relaxed>
-        {products.map((product) => (
-          <ProductView key={product.id} product={product} />
-        ))}
-      </List>
-    </div>
+    <>
+      <NavBar />
+      <ProductDashboard products={products} />
+    </>
   );
 }
 
