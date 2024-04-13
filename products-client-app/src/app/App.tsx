@@ -6,13 +6,15 @@ import { Header, List } from 'semantic-ui-react';
 import ProductView from './components/ProductView';
 
 function App() {
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
     if (products.length === 0) {
-      axios.get('http://localhost:5000/api/Products').then((response) => {
-        setProducts(response.data);
-      });
+      axios
+        .get<Product[]>('http://localhost:5000/api/Products')
+        .then((response) => {
+          setProducts(response.data);
+        });
     }
   }, [products]);
 
@@ -20,7 +22,7 @@ function App() {
     <div>
       <Header as='h2' icon='shopping bag' content='Products' />
       <List divided relaxed>
-        {products.map((product: Product) => (
+        {products.map((product) => (
           <ProductView key={product.id} product={product} />
         ))}
       </List>
