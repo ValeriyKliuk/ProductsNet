@@ -2,7 +2,10 @@ import React from 'react';
 import { Button, Container, Menu } from 'semantic-ui-react';
 import viteLogo from '/vite.svg';
 
-const NavBar: React.FC = () => {
+interface NavBarProps {
+  openForm: () => void;
+}
+const NavBar: React.FC<NavBarProps> = ({ openForm }) => {
   return (
     <Menu fixed='top' inverted>
       <Container>
@@ -12,7 +15,7 @@ const NavBar: React.FC = () => {
         </Menu.Item>
         <Menu.Item name='Products' />
         <Menu.Item>
-          <Button positive content='Create Product' />
+          <Button positive content='Create Product' onClick={openForm} />
         </Menu.Item>
       </Container>
     </Menu>

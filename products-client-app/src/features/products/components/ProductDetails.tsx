@@ -4,8 +4,14 @@ import { Button, Card, Image } from 'semantic-ui-react';
 
 interface ProductDetailsProps {
   product: Product;
+  cancelSelectProduct: () => void;
+  openForm: (id: string) => void;
 }
-export const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
+export const ProductDetails: React.FC<ProductDetailsProps> = ({
+  product,
+  cancelSelectProduct,
+  openForm,
+}) => {
   return (
     <Card fluid>
       <Image
@@ -22,8 +28,18 @@ export const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
       </Card.Content>
       <Card.Content extra>
         <Button.Group widths='2'>
-          <Button basic color='blue' content='Edit' />
-          <Button basic color='red' content='Delete' />
+          <Button
+            basic
+            color='blue'
+            content='Edit'
+            onClick={() => openForm(product.id)}
+          />
+          <Button
+            basic
+            color='grey'
+            content='Cancel'
+            onClick={cancelSelectProduct}
+          />
         </Button.Group>
       </Card.Content>
     </Card>

@@ -5,14 +5,25 @@ import ProductView from './ProductView';
 
 interface ProductListProps {
   products: Product[];
+  selectProduct: (id: string) => void;
+  deleteProduct: (id: string) => void;
 }
 
-export const ProductList: React.FC<ProductListProps> = ({ products }) => {
+export const ProductList: React.FC<ProductListProps> = ({
+  products,
+  selectProduct,
+  deleteProduct,
+}) => {
   return (
     <Segment>
       <Item.Group divided>
         {products.map((product) => (
-          <ProductView key={product.id} product={product} />
+          <ProductView
+            key={product.id}
+            product={product}
+            selectProduct={selectProduct}
+            deleteProduct={deleteProduct}
+          />
         ))}
       </Item.Group>
     </Segment>
