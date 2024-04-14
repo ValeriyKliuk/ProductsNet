@@ -15,6 +15,7 @@ interface ProductDashboardProps {
   closeForm: () => void;
   createOrEdit: (product: Product) => void;
   deleteProduct: (id: string) => void;
+  submitting: boolean;
 }
 export const ProductDashboard: React.FC<ProductDashboardProps> = ({
   products,
@@ -26,6 +27,7 @@ export const ProductDashboard: React.FC<ProductDashboardProps> = ({
   closeForm,
   createOrEdit,
   deleteProduct,
+  submitting,
 }) => {
   return (
     <Grid>
@@ -34,6 +36,7 @@ export const ProductDashboard: React.FC<ProductDashboardProps> = ({
           products={products}
           selectProduct={selectProduct}
           deleteProduct={deleteProduct}
+          submitting={submitting}
         />
       </Grid.Column>
       <Grid.Column width={6}>
@@ -49,6 +52,7 @@ export const ProductDashboard: React.FC<ProductDashboardProps> = ({
             closeForm={closeForm}
             product={selectedProduct}
             createOrEdit={createOrEdit}
+            submitting={submitting}
           />
         )}
       </Grid.Column>

@@ -6,12 +6,14 @@ interface ProductFormProps {
   product: Product | undefined;
   closeForm: () => void;
   createOrEdit: (product: Product) => void;
+  submitting: boolean;
 }
 
 export const ProductForm: React.FC<ProductFormProps> = ({
   product: selectedProduct,
   closeForm,
   createOrEdit,
+  submitting,
 }) => {
   const initialState: Product = selectedProduct ?? {
     id: '',
@@ -76,6 +78,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
         <Form.Input
           placeholder='Price'
           name='price'
+          type='number'
           value={product.price}
           onChange={handleInputChange}
         />
@@ -94,36 +97,42 @@ export const ProductForm: React.FC<ProductFormProps> = ({
         <Form.Input
           placeholder='Height'
           name='height'
+          type='number'
           value={product.height}
           onChange={handleInputChange}
         />
         <Form.Input
           placeholder='Width'
           name='width'
+          type='number'
           value={product.width}
           onChange={handleInputChange}
         />
         <Form.Input
           placeholder='Depth'
           name='depth'
+          type='number'
           value={product.depth}
           onChange={handleInputChange}
         />
         <Form.Input
           placeholder='Weight'
           name='weight'
+          type='number'
           value={product.weight}
           onChange={handleInputChange}
         />
         <Form.Input
           placeholder='Quantity'
           name='quantity'
+          type='number'
           value={product.quantity}
           onChange={handleInputChange}
         />
         <Form.Input
           placeholder='Rating'
           name='rating'
+          type='number'
           value={product.rating}
           onChange={handleInputChange}
         />
@@ -142,10 +151,17 @@ export const ProductForm: React.FC<ProductFormProps> = ({
         <Form.Input
           placeholder='Date'
           name='date'
+          type='date'
           value={product.date}
           onChange={handleInputChange}
         />
-        <Button floated='right' positive type='submit' content='Submit' />
+        <Button
+          loading={submitting}
+          floated='right'
+          positive
+          type='submit'
+          content='Submit'
+        />
         <Button
           floated='right'
           type='button'

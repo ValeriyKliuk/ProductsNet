@@ -7,12 +7,14 @@ interface ProductListProps {
   products: Product[];
   selectProduct: (id: string) => void;
   deleteProduct: (id: string) => void;
+  submitting: boolean;
 }
 
 export const ProductList: React.FC<ProductListProps> = ({
   products,
   selectProduct,
   deleteProduct,
+  submitting,
 }) => {
   return (
     <Segment>
@@ -23,6 +25,7 @@ export const ProductList: React.FC<ProductListProps> = ({
             product={product}
             selectProduct={selectProduct}
             deleteProduct={deleteProduct}
+            submitting={submitting}
           />
         ))}
       </Item.Group>

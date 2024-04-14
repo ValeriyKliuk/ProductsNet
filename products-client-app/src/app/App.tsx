@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-import axios from 'axios';
 import { Product } from './models/Product';
 import NavBar from './layout/NavBar';
 import { ProductDashboard } from '../features/products/dashboard/ProductDashboard';
 import { v4 as uuid } from 'uuid';
+import agent from './api/agent';
+import { LoadingView } from './layout/LoadingView';
 
 function App() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -12,14 +13,20 @@ function App() {
     undefined
   );
   const [editMode, setEditMode] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
     if (products.length === 0) {
-      axios
-        .get<Product[]>('http://localhost:5000/api/Products')
-        .then((response) => {
-          setProducts(response.data);
+      agent.Products.list().then((response) => {
+        const products: Product[] = [];
+        response.forEach((product) => {
+          product.date = product.date.split('T')[0];
+          products.push(product);
         });
+        setProducts(products);
+        setLoading(false);
+      });
     }
   }, [products]);
 
@@ -43,16 +50,38 @@ function App() {
   };
 
   const handleCreateOrEditProduct = (product: Product) => {
-    product.id
-      ? setProducts([...products.filter((p) => p.id !== product.id), product])
-      : setProducts([...products, { ...product, id: uuid() }]);
-    setEditMode(false);
-    setSelectedProduct(product);
+    setSubmitting(true);
+    if (product.id) {
+      agent.Products.update(product).then(() => {
+        setProducts([...products.filter((p) => p.id !== product.id), product]);
+        setSelectedProduct(product);
+        setEditMode(false);
+        setSubmitting(false);
+      });
+    } else {
+      product.id = uuid();
+      agent.Products.create(product).then(() => {
+        setProducts([...products, product]);
+        setSelectedProduct(product);
+        setEditMode(false);
+        setSubmitting(false);
+      });
+    }
   };
 
   const handleDeleteProduct = (id: string) => {
-    setProducts([...products.filter((product) => product.id !== id)]);
+    setSubmitting(true);
+    setEditMode(false);
+    setSelectedProduct(undefined);
+    agent.Products.delete(id).then(() => {
+      setProducts([...products.filter((product) => product.id !== id)]);
+      setSubmitting(false);
+    });
   };
+
+  if (loading) {
+    return <LoadingView />;
+  }
   return (
     <>
       <NavBar openForm={handleFormOpen} />
@@ -66,6 +95,7 @@ function App() {
         closeForm={handleFormClose}
         createOrEdit={handleCreateOrEditProduct}
         deleteProduct={handleDeleteProduct}
+        submitting={submitting}
       />
     </>
   );

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { SyntheticEvent } from 'react';
 import { Product } from '../../../app/models/Product';
 import { Button, Item, Label } from 'semantic-ui-react';
 
@@ -6,13 +6,25 @@ interface ProductViewProps {
   product: Product;
   selectProduct: (id: string) => void;
   deleteProduct: (id: string) => void;
+  submitting: boolean;
 }
 
 const ProductView: React.FC<ProductViewProps> = ({
   product,
   selectProduct,
   deleteProduct,
+  submitting,
 }) => {
+  const [target, setTarget] = React.useState('');
+
+  const handleProductDelete = (
+    event: SyntheticEvent<HTMLButtonElement>,
+    id: string
+  ) => {
+    setTarget(event.currentTarget.name);
+    deleteProduct(id);
+  };
+
   return (
     <Item>
       <Item.Image size='tiny' src={`/assets/productImages/${product.image}`} />
@@ -30,10 +42,12 @@ const ProductView: React.FC<ProductViewProps> = ({
             onClick={() => selectProduct(product.id)}
           />
           <Button
+            name={product.id}
             floated='right'
             content='Delete'
             color='red'
-            onClick={() => deleteProduct(product.id)}
+            loading={submitting && target === product.id}
+            onClick={(e) => handleProductDelete(e, product.id)}
           />
           <Label basic content={product.category} />
         </Item.Extra>
