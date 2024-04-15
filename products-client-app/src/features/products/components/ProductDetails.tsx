@@ -1,30 +1,24 @@
 import React from 'react';
-import { Product } from '../../../app/models/Product';
 import { Button, Card, Image } from 'semantic-ui-react';
+import { useStore } from '../../../app/stores/Store';
 
-interface ProductDetailsProps {
-  product: Product;
-  cancelSelectProduct: () => void;
-  openForm: (id: string) => void;
-}
-export const ProductDetails: React.FC<ProductDetailsProps> = ({
-  product,
-  cancelSelectProduct,
-  openForm,
-}) => {
+export const ProductDetails: React.FC = () => {
+  const {
+    productStore: { cancelSelectedProduct, selectedProduct, openForm },
+  } = useStore();
   return (
     <Card fluid>
       <Image
-        src={`/assets/productImages/${product.image}`}
+        src={`/assets/productImages/${selectedProduct?.image}`}
         wrapped
         ui={false}
       />
       <Card.Content>
-        <Card.Header>{product.name}</Card.Header>
+        <Card.Header>{selectedProduct?.name}</Card.Header>
         <Card.Meta>
-          <span>{product.price}</span>
+          <span>{selectedProduct?.price}</span>
         </Card.Meta>
-        <Card.Description>{product.description}</Card.Description>
+        <Card.Description>{selectedProduct?.description}</Card.Description>
       </Card.Content>
       <Card.Content extra>
         <Button.Group widths='2'>
@@ -32,13 +26,13 @@ export const ProductDetails: React.FC<ProductDetailsProps> = ({
             basic
             color='blue'
             content='Edit'
-            onClick={() => openForm(product.id)}
+            onClick={() => openForm(selectedProduct?.id)}
           />
           <Button
             basic
             color='grey'
             content='Cancel'
-            onClick={cancelSelectProduct}
+            onClick={() => cancelSelectedProduct()}
           />
         </Button.Group>
       </Card.Content>

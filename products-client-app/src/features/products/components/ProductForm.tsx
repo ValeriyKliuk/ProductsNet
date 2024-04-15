@@ -1,20 +1,20 @@
 import React, { ChangeEvent, useState } from 'react';
 import { Button, Form, Segment } from 'semantic-ui-react';
 import { Product } from '../../../app/models/Product';
+import { useStore } from '../../../app/stores/Store';
+import { observer } from 'mobx-react-lite';
 
-interface ProductFormProps {
-  product: Product | undefined;
-  closeForm: () => void;
-  createOrEdit: (product: Product) => void;
-  submitting: boolean;
-}
+const ProductForm: React.FC = () => {
+  const {
+    productStore: {
+      selectedProduct,
+      closeForm,
+      createProduct,
+      updateProduct,
+      loading,
+    },
+  } = useStore();
 
-export const ProductForm: React.FC<ProductFormProps> = ({
-  product: selectedProduct,
-  closeForm,
-  createOrEdit,
-  submitting,
-}) => {
   const initialState: Product = selectedProduct ?? {
     id: '',
     name: '',
@@ -38,7 +38,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
   const [product, setProduct] = useState(initialState);
 
   const handleSubmit = () => {
-    createOrEdit(product);
+    product.id ? updateProduct(product) : createProduct(product);
   };
 
   const handleInputChange = (
@@ -156,7 +156,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
           onChange={handleInputChange}
         />
         <Button
-          loading={submitting}
+          loading={loading}
           floated='right'
           positive
           type='submit'
@@ -172,3 +172,5 @@ export const ProductForm: React.FC<ProductFormProps> = ({
     </Segment>
   );
 };
+
+export default observer(ProductForm);

@@ -1,20 +1,17 @@
 import React, { SyntheticEvent } from 'react';
 import { Product } from '../../../app/models/Product';
 import { Button, Item, Label } from 'semantic-ui-react';
+import { useStore } from '../../../app/stores/Store';
+import { observer } from 'mobx-react-lite';
 
 interface ProductViewProps {
   product: Product;
-  selectProduct: (id: string) => void;
-  deleteProduct: (id: string) => void;
-  submitting: boolean;
 }
 
-const ProductView: React.FC<ProductViewProps> = ({
-  product,
-  selectProduct,
-  deleteProduct,
-  submitting,
-}) => {
+const ProductView: React.FC<ProductViewProps> = ({ product }) => {
+  const {
+    productStore: { selectProduct, deleteProduct, loading, editMode },
+  } = useStore();
   const [target, setTarget] = React.useState('');
 
   const handleProductDelete = (
@@ -39,6 +36,7 @@ const ProductView: React.FC<ProductViewProps> = ({
             floated='right'
             content='View'
             color='blue'
+            disabled={editMode}
             onClick={() => selectProduct(product.id)}
           />
           <Button
@@ -46,7 +44,8 @@ const ProductView: React.FC<ProductViewProps> = ({
             floated='right'
             content='Delete'
             color='red'
-            loading={submitting && target === product.id}
+            disabled={editMode}
+            loading={loading && target === product.id}
             onClick={(e) => handleProductDelete(e, product.id)}
           />
           <Label basic content={product.category} />
@@ -56,4 +55,4 @@ const ProductView: React.FC<ProductViewProps> = ({
   );
 };
 
-export default ProductView;
+export default observer(ProductView);

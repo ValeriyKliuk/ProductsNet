@@ -1,34 +1,23 @@
 import React from 'react';
-import { Product } from '../../../app/models/Product';
 import { Item, Segment } from 'semantic-ui-react';
 import ProductView from './ProductView';
+import { useStore } from '../../../app/stores/Store';
+import { observer } from 'mobx-react-lite';
 
-interface ProductListProps {
-  products: Product[];
-  selectProduct: (id: string) => void;
-  deleteProduct: (id: string) => void;
-  submitting: boolean;
-}
+const ProductList: React.FC = () => {
+  const {
+    productStore: { productsByDate },
+  } = useStore();
 
-export const ProductList: React.FC<ProductListProps> = ({
-  products,
-  selectProduct,
-  deleteProduct,
-  submitting,
-}) => {
   return (
     <Segment>
       <Item.Group divided>
-        {products.map((product) => (
-          <ProductView
-            key={product.id}
-            product={product}
-            selectProduct={selectProduct}
-            deleteProduct={deleteProduct}
-            submitting={submitting}
-          />
+        {productsByDate.map((product) => (
+          <ProductView key={product.id} product={product} />
         ))}
       </Item.Group>
     </Segment>
   );
 };
+
+export default observer(ProductList);
