@@ -1,11 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button, Card, Image } from 'semantic-ui-react';
 import { useStore } from '../../../app/stores/Store';
+import { observer } from 'mobx-react-lite';
+import { useParams } from 'react-router-dom';
+import { LoadingView } from '../../../app/layout/LoadingView';
 
-export const ProductDetails: React.FC = () => {
+const ProductDetails: React.FC = () => {
   const {
-    productStore: { cancelSelectedProduct, selectedProduct, openForm },
+    productStore: { selectedProduct, loadProduct, loadingInitial },
   } = useStore();
+  const { id } = useParams<{ id: string }>();
+
+  useEffect(() => {
+    if (id) loadProduct(id);
+  }, [id, loadProduct]);
+
+  if (loadingInitial || !selectedProduct) return <LoadingView />;
+
   return (
     <Card fluid>
       <Image
@@ -22,20 +33,12 @@ export const ProductDetails: React.FC = () => {
       </Card.Content>
       <Card.Content extra>
         <Button.Group widths='2'>
-          <Button
-            basic
-            color='blue'
-            content='Edit'
-            onClick={() => openForm(selectedProduct?.id)}
-          />
-          <Button
-            basic
-            color='grey'
-            content='Cancel'
-            onClick={() => cancelSelectedProduct()}
-          />
+          <Button basic color='blue' content='Edit' />
+          <Button basic color='grey' content='Cancel' />
         </Button.Group>
       </Card.Content>
     </Card>
   );
 };
+
+export default observer(ProductDetails);

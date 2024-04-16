@@ -6,13 +6,7 @@ import { observer } from 'mobx-react-lite';
 
 const ProductForm: React.FC = () => {
   const {
-    productStore: {
-      selectedProduct,
-      closeForm,
-      createProduct,
-      updateProduct,
-      loading,
-    },
+    productStore: { selectedProduct, createProduct, updateProduct, loading },
   } = useStore();
 
   const initialState: Product = selectedProduct ?? {
@@ -162,12 +156,7 @@ const ProductForm: React.FC = () => {
           type='submit'
           content='Submit'
         />
-        <Button
-          floated='right'
-          type='button'
-          content='Cancel'
-          onClick={closeForm}
-        />
+        <Button floated='right' type='button' content='Cancel' />
       </Form>
     </Segment>
   );

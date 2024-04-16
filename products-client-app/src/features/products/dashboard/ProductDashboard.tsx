@@ -1,23 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Grid } from 'semantic-ui-react';
 import ProductList from '../components/ProductList';
-import { ProductDetails } from '../components/ProductDetails';
-import ProductForm from '../components/ProductForm';
 import { useStore } from '../../../app/stores/Store';
 import { observer } from 'mobx-react-lite';
+import { LoadingView } from '../../../app/layout/LoadingView';
 
 const ProductDashboard: React.FC = () => {
   const {
-    productStore: { selectedProduct, editMode },
+    productStore: { loadProducts, loadingInitial },
   } = useStore();
+
+  useEffect(() => {
+    loadProducts();
+  }, [loadProducts]);
+
+  if (loadingInitial) {
+    return <LoadingView />;
+  }
+
   return (
     <Grid>
-      <Grid.Column width={10}>
+      <Grid.Column width={'16'}>
         <ProductList />
-      </Grid.Column>
-      <Grid.Column width={6}>
-        {selectedProduct && !editMode && <ProductDetails />}
-        {editMode && <ProductForm />}
       </Grid.Column>
     </Grid>
   );

@@ -3,6 +3,7 @@ import { Product } from '../../../app/models/Product';
 import { Button, Item, Label } from 'semantic-ui-react';
 import { useStore } from '../../../app/stores/Store';
 import { observer } from 'mobx-react-lite';
+import { Link } from 'react-router-dom';
 
 interface ProductViewProps {
   product: Product;
@@ -10,7 +11,7 @@ interface ProductViewProps {
 
 const ProductView: React.FC<ProductViewProps> = ({ product }) => {
   const {
-    productStore: { selectProduct, deleteProduct, loading, editMode },
+    productStore: { deleteProduct, loading, editMode },
   } = useStore();
   const [target, setTarget] = React.useState('');
 
@@ -33,11 +34,12 @@ const ProductView: React.FC<ProductViewProps> = ({ product }) => {
         </Item.Description>
         <Item.Extra>
           <Button
+            as={Link}
+            to={`/products/${product.id}`}
             floated='right'
             content='View'
             color='blue'
             disabled={editMode}
-            onClick={() => selectProduct(product.id)}
           />
           <Button
             name={product.id}

@@ -8,7 +8,7 @@ export class ProductStore {
   selectedProduct: Product | undefined = undefined;
   editMode = false;
   loading = false;
-  loadingInitial = true;
+  loadingInitial = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -20,36 +20,54 @@ export class ProductStore {
     );
   }
 
-  selectProduct = (id: string) => {
-    this.selectedProduct = this.productRegistry.get(id);
+  private getProduct = (id: string) => {
+    return this.productRegistry.get(id);
   };
 
-  cancelSelectedProduct = () => {
-    this.selectedProduct = undefined;
+  setProduct = (product: Product) => {
+    product.date = product.date.split('T')[0];
+    this.productRegistry.set(product.id, product);
   };
 
-  openForm = (id?: string) => {
-    id ? this.selectProduct(id) : this.cancelSelectedProduct();
-    this.editMode = true;
+  setLoadingInitial = (state: boolean) => {
+    this.loadingInitial = state;
   };
 
-  closeForm = () => {
-    this.editMode = false;
+  private setSelectedProduct = (product: Product) => {
+    this.selectedProduct = product;
   };
 
   loadProducts = async () => {
+    this.setLoadingInitial(true);
     try {
       const products = await agent.Products.list();
       products.forEach((product) => {
-        product.date = product.date.split('T')[0];
-        runInAction(() => {
-          this.productRegistry.set(product.id, product);
-          this.loadingInitial = false;
-        });
+        this.setProduct(product);
+        this.setLoadingInitial(false);
       });
     } catch (error) {
       console.log(error);
-      this.loadingInitial = false;
+      this.setLoadingInitial(false);
+    }
+  };
+
+  loadProduct = async (id: string) => {
+    let product = this.getProduct(id);
+    if (product) {
+      this.selectedProduct = product;
+      // return product;
+    } else {
+      this.loadingInitial = true;
+      try {
+        product = await agent.Products.details(id);
+        this.setProduct(product);
+        this.setSelectedProduct(product);
+        this.setLoadingInitial(false);
+        // return product;
+      } catch (error) {
+        console.log(error);
+        this.setLoadingInitial(false);
+      }
     }
   };
 
@@ -90,7 +108,6 @@ export class ProductStore {
     this.loading = true;
     try {
       await agent.Products.delete(id);
-      if (this.selectedProduct?.id === id) this.cancelSelectedProduct();
       runInAction(() => {
         this.productRegistry.delete(id);
         this.loading = false;
