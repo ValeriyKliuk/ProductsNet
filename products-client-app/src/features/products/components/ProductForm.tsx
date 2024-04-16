@@ -1,15 +1,28 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import { Button, Form, Segment } from 'semantic-ui-react';
 import { Product } from '../../../app/models/Product';
 import { useStore } from '../../../app/stores/Store';
 import { observer } from 'mobx-react-lite';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import { LoadingView } from '../../../app/layout/LoadingView';
+import { v4 as uuid } from 'uuid';
 
 const ProductForm: React.FC = () => {
   const {
-    productStore: { selectedProduct, createProduct, updateProduct, loading },
+    productStore: {
+      selectedProduct,
+      createProduct,
+      updateProduct,
+      loading,
+      loadProduct,
+      loadingInitial,
+    },
   } = useStore();
 
-  const initialState: Product = selectedProduct ?? {
+  const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
+
+  const initialState: Product = {
     id: '',
     name: '',
     shortName: '',
@@ -31,8 +44,21 @@ const ProductForm: React.FC = () => {
 
   const [product, setProduct] = useState(initialState);
 
+  useEffect(() => {
+    if (id) {
+      loadProduct(id).then(() => {
+        setProduct(selectedProduct!);
+      });
+    }
+  }, [id, loadProduct, selectedProduct]);
+
   const handleSubmit = () => {
-    product.id ? updateProduct(product) : createProduct(product);
+    if (product.id === '') {
+      product.id = uuid();
+      createProduct(product).then(() => navigate(`/products/${product.id}`));
+    } else {
+      updateProduct(product).then(() => navigate(`/products/${product.id}`));
+    }
   };
 
   const handleInputChange = (
@@ -41,6 +67,8 @@ const ProductForm: React.FC = () => {
     const { name, value } = event.target;
     setProduct({ ...product, [name]: value });
   };
+
+  if (loadingInitial) return <LoadingView content='Loading product...' />;
 
   return (
     <Segment clearing>
@@ -156,7 +184,13 @@ const ProductForm: React.FC = () => {
           type='submit'
           content='Submit'
         />
-        <Button floated='right' type='button' content='Cancel' />
+        <Button
+          as={Link}
+          to='/products'
+          floated='right'
+          type='button'
+          content='Cancel'
+        />
       </Form>
     </Segment>
   );

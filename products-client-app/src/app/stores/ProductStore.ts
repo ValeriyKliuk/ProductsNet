@@ -55,7 +55,7 @@ export class ProductStore {
     let product = this.getProduct(id);
     if (product) {
       this.selectedProduct = product;
-      // return product;
+      return product;
     } else {
       this.loadingInitial = true;
       try {
@@ -63,7 +63,7 @@ export class ProductStore {
         this.setProduct(product);
         this.setSelectedProduct(product);
         this.setLoadingInitial(false);
-        // return product;
+        return product;
       } catch (error) {
         console.log(error);
         this.setLoadingInitial(false);

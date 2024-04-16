@@ -7,15 +7,17 @@ import { LoadingView } from '../../../app/layout/LoadingView';
 
 const ProductDashboard: React.FC = () => {
   const {
-    productStore: { loadProducts, loadingInitial },
+    productStore: { loadProducts, loadingInitial, productRegistry },
   } = useStore();
 
   useEffect(() => {
-    loadProducts();
-  }, [loadProducts]);
+    if (productRegistry.size <= 1) {
+      loadProducts();
+    }
+  }, [loadProducts, productRegistry.size]);
 
   if (loadingInitial) {
-    return <LoadingView />;
+    return <LoadingView content='Loading products...' />;
   }
 
   return (
